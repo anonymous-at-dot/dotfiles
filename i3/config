@@ -1,0 +1,241 @@
+# Should you change your keyboard layout some time, delete
+# this file and re-run i3-config-wizard(1).
+#
+
+set $mod Mod4
+
+# Font for window titles. 
+font pango: DejaVuSansMono Nerd Font 7
+#font xft:MachineHead 4
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# exec terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# exec terminal in floating mode
+bindsym $mod+u exec urxvt --title "float"
+
+# exec chromium
+bindsym $mod+c exec chromium
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+
+#rofi to replace dmenu
+bindsym $mod+d exec --no-startup-id rofi -show run
+#bindsym $mod+d exec "dmenu_run -nf '#A39E9B' -nb  '#2F1E2E' -sb '#A39E9B' -sf '#2f1e2e' -fn 'monospace-10' -p 'dmenu prompt ;'"
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+#jump to urgent window
+bindsym $mod+x [urgent=latest] focus
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 2 px or 2 ppt
+        bindsym k resize grow height 2 px or 2 ppt
+        bindsym l resize shrink height 2 px or 2 ppt
+        bindsym semicolon resize grow width 2 px or 2 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 2 px or 2 ppt
+        bindsym Down resize grow height 2 px or 2 ppt
+        bindsym Up resize shrink height 2 px or 2 ppt
+        bindsym Right resize grow width 2 px or 2 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
+
+#colour definitions
+set $transparent	#00000000
+set $dark		#2f1e2e
+set $light		#a39e9b
+
+#i3blocks config
+
+bar	{
+	verbose yes
+	status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
+	#status_command i3status
+	i3bar_command i3bar -t
+	position top
+	#font pango: MachineHead 5
+	font pango: DejaVuSansMono Nerd Font 9
+	#font pango: Material Icons 10
+	#font pano:Icons 15
+	#font pango: fontello 9
+		colors {
+		background #644062
+		statusline #E2B1CD
+    	separator  #644062
+
+			focused_workspace  #644062 #CFC4C4 #644062
+	    	active_workspace   #644062 #644062 #CFC4C4
+    		inactive_workspace #644061 #644062 #DFD7CA
+    		urgent_workspace   #CFC4C4 #DA8886 #CFC4C4
+    		binding_mode       #2F343A #EF6155 #FFFFFF
+				}
+	}
+
+#disable focus following the cursor
+focus_follows_mouse no
+
+# class                 border  bground text    indicator child_border#
+client.focused          #644062 #644062 #E7E9DB #644062   #644062
+client.focused_inactive	#4F424C #4F424C #2F1E2E #4F424C   #4F424C
+client.unfocused        #4F424C #4F424C #2F1E2E #4F424C   #4F424C
+client.urgent           #EF6155 #EF6155 #2F1E2E #EF6155   #EF6155
+client.placeholder      #4F424C #4F424C #8B8FA3 #4F424C   #4F424C
+client.background       #2F1E2E
+
+#window border styles#
+default_border normal 1
+default_floating_border pixel  0
+hide_edge_borders both
+#floating_maximum_size 1366 x 768
+floating_maximum_size 768 x 768
+
+for_window [title="Open File"] floating enable, border 1
+for_window [title="Open Image"] floating enable, border 1
+for_window [class="MPlayer"] floating enable, border 1
+#for_window [class="URxvt"] layout stacked
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+#floating window invoked if and only if the title reads 'float'
+for_window [title="^float$" ] floating enable
+#other floating rules
+for_window [title="^Open Font$" ] floating enable
+for_window [title="^FontForge$" ] floating enable
+for_window [title="^Warnings$" ] floating enable
+
+
+
+#gaps
+smart_gaps on
+gaps outer 0
+gaps inner 5
+#bindsym $mod+o gaps outer current set 3; gaps inner current set 6
+#bindsym $mod+i gaps outer current set 20; gaps inner current set 20p
+
+#i3blocks key indicators
+ bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+#no number lock on lenovo
+# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+#bg exec
+exec_always touchpad_config -e 17 --no-startup-id
+exec_always xset -b --no-startup-id
+
+#setwallpaper
+exec_always feh --randomize --bg-fill '/mnt/motorhead/images/wp/' --no-startup-id
